@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 
 import MenuOptionCard from "../../Shared/UI/MenuOptionCard";
-import { DishCategories } from "../../Shared/Dishes/DishCategories";
+import { DishCategories } from "../../Shared/dishes/DishCategories";
 import AllMenu from "./Menu/AllMenu";
 
 const AllDishesOption = () => {
   const [category, setCategory] = useState("All");
+  const [isSelected, setIsSelected] = useState(DishCategories);
 
   const setDishCategory = (category) => {
     setCategory(category);
+    setIsSelected((prevItems) =>
+      prevItems.map((item) =>
+        item.category === category
+          ? { ...item, selected: true }
+          : { ...item, selected: false }
+      )
+    );
   };
 
   return (
@@ -19,13 +27,14 @@ const AllDishesOption = () => {
         </p>
       </div>
       <div className="flex flex-row flex-wrap justify-center w-[90vw] m-auto">
-        {DishCategories.map((dish) => (
+        {isSelected.map((dish) => (
           <MenuOptionCard
             key={dish.title}
             image={dish.image}
             title={dish.title}
             onClick={setDishCategory}
             category={dish.category}
+            selected={dish.selected}
           />
         ))}
       </div>

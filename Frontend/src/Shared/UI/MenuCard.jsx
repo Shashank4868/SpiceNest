@@ -22,6 +22,13 @@ const Menucard = (props) => {
             size={30}
             style={{ color: "white" }}
             className="block m-auto absolute inset-0"
+            onClick={() => {
+              props.onClick({
+                id: props.id,
+                title: props.title,
+                price: props.price,
+              });
+            }}
           />
         </div>
       </div>

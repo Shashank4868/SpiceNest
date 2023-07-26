@@ -2,7 +2,7 @@ import React from "react";
 
 import Card from "../../Shared/UI/Card";
 import Button from "../../Shared/UI/Button";
-import { AllMenu as AllMenuItems } from "../../Shared/Dishes/AllMenu";
+import { AllMenu as AllMenuItems } from "../../Shared/dishes/AllMenu";
 
 const Middle = () => {
   const FAST_FOOD = AllMenuItems.filter(

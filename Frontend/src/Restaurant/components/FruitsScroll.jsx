@@ -2,7 +2,7 @@ import React from "react";
 
 import Card from "../../Shared/UI/Card";
 // import { Fruits } from "../../Shared/Dishes/Fruits";
-import { AllMenu as AllMenuItems } from "../../Shared/Dishes/AllMenu";
+import { AllMenu as AllMenuItems } from "../../Shared/dishes/AllMenu";
 import { CgArrowLeftO, CgArrowRightO } from "react-icons/cg";
 
 const FruitsScroll = (props) => {

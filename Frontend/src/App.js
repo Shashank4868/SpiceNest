@@ -9,20 +9,23 @@ import {
 
 import HomePage from "./Restaurant/Pages/Home";
 import MenuPage from "./Restaurant/Pages/Menu";
+import CartProvider from "./Shared/context/CartProvider";
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/" exact>
-          <HomePage />
-        </Route>
-        <Route to="/menu">
-          <MenuPage />
-        </Route>
-        <Redirect to="/" />
-      </Switch>
-    </Router>
+    <CartProvider>
+      <Router>
+        <Switch>
+          <Route path="/" exact>
+            <HomePage />
+          </Route>
+          <Route to="/menu">
+            <MenuPage />
+          </Route>
+          <Redirect to="/" />
+        </Switch>
+      </Router>
+    </CartProvider>
   );
 }
 

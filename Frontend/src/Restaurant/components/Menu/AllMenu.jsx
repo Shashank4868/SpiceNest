@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 
-import { AllMenu as AllMenuItems } from "../../../Shared/Dishes/AllMenu";
+import { AllMenu as AllMenuItems } from "../../../Shared/dishes/AllMenu";
+import CartContext from "../../../Shared/context/cart-context";
 
 import Menucard from "../../../Shared/UI/MenuCard";
 
 const AllMenu = (props) => {
+  const cartCtx = useContext(CartContext);
+
+  const addToCartHandler = ({ id, title, price }) => {
+    console.log("add to cart", price);
+    console.log(title);
+    cartCtx.addItem({
+      id: id,
+      title: title,
+      price: price,
+      amount: 1,
+    });
+  };
+
   var displayMenu;
   props.category === "All"
     ? (displayMenu = AllMenuItems)
@@ -21,6 +35,7 @@ const AllMenu = (props) => {
             title={item.title}
             price={item.price}
             description={item.description}
+            onClick={addToCartHandler}
           />
         ))}
       </div>
