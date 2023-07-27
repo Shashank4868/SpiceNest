@@ -9,11 +9,9 @@ const AllMenu = (props) => {
   const cartCtx = useContext(CartContext);
 
   const addToCartHandler = ({ id, title, price }) => {
-    console.log("add to cart", price);
-    console.log(title);
     cartCtx.addItem({
       id: id,
-      title: title,
+      name: title,
       price: price,
       amount: 1,
     });
@@ -25,22 +23,26 @@ const AllMenu = (props) => {
     : (displayMenu = AllMenuItems.filter(
         (item) => item.category === props.category
       ));
-  return (
-    <div className="m-8 bg-DBE2EF rounded-xl">
-      <div className="m-8 bg-DBE2EF flex flex-wrap justify-center rounded-xl">
-        {displayMenu.map((item) => (
-          <Menucard
-            key={item.title}
-            image={item.image}
-            title={item.title}
-            price={item.price}
-            description={item.description}
-            onClick={addToCartHandler}
-          />
-        ))}
+  if (displayMenu.length !== 0) {
+    return (
+      <div className="m-8 bg-DBE2EF rounded-xl">
+        <div className="m-8 bg-DBE2EF flex flex-wrap justify-center rounded-xl">
+          {displayMenu.map((item) => (
+            <Menucard
+              key={item.id}
+              id={item.id}
+              image={item.image}
+              title={item.title}
+              price={item.price}
+              description={item.description}
+              onClick={addToCartHandler}
+            />
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+  return <div className="text-center p-8 text-red">No Items Found!</div>;
 };
 
 export default AllMenu;

@@ -10,7 +10,10 @@ const CartButton = () => {
   const [showCart, setShowCart] = useState(false);
 
   const showCartHandler = () => {
-    console.log("show cart");
+    setShowCart((prevShowCart) => !prevShowCart);
+  };
+
+  const closeCartHandler = () => {
     setShowCart((prevShowCart) => !prevShowCart);
   };
 
@@ -19,7 +22,7 @@ const CartButton = () => {
       {/* Render Cart elements inside of Modal as children */}
       {showCart && (
         <Modal>
-          <Cart />
+          <Cart onClose={closeCartHandler} />
         </Modal>
       )}
       <Button title="Cart" onClick={showCartHandler}>

@@ -35,4 +35,7 @@ module.exports = {
     },
     require("tailwind-scrollbar-hide"),
   ],
+  corePlugins: {
+    scrollbar: false,
+  },
 };

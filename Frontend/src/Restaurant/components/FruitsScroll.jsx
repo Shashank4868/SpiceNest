@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import Card from "../../Shared/UI/Card";
 // import { Fruits } from "../../Shared/Dishes/Fruits";
 import { AllMenu as AllMenuItems } from "../../Shared/dishes/AllMenu";
 import { CgArrowLeftO, CgArrowRightO } from "react-icons/cg";
+import CartContext from "../../Shared/context/cart-context";
 
 const FruitsScroll = (props) => {
+  const cartCtx = useContext(CartContext);
   const Fruits = AllMenuItems.filter((item) => item.category === "fruits");
 
   const slideLeft = () => {
@@ -15,6 +17,15 @@ const FruitsScroll = (props) => {
   const slideRight = () => {
     var slider = document.getElementById("slider");
     slider.scrollLeft += 500;
+  };
+
+  const addToCartHandler = ({ id, title, price }) => {
+    cartCtx.addItem({
+      id: id,
+      name: title,
+      price: price,
+      amount: 1,
+    });
   };
 
   return (
@@ -45,11 +56,13 @@ const FruitsScroll = (props) => {
             <Card
               className="w-[14rem] h-64 bg-grey inline-block p-0 cursor-pointer hover:opacity-90 rounded-xl overflow-hidden shadow-card items-center m-4 "
               key={fruit.id}
+              id={fruit.id}
               title={fruit.title}
               description={fruit.description}
               price={fruit.price}
               image={fruit.image}
               cartIcon={true}
+              onClick={addToCartHandler}
             />
           ))}
         </div>

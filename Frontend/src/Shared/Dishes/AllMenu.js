@@ -1,6 +1,6 @@
 export const AllMenu = [
   {
-    id: 2,
+    id: 1,
     title: "Chicken Pizza",
     description: "This is a pizza",
     category: "fast-food",
@@ -9,7 +9,7 @@ export const AllMenu = [
       "https://img.freepik.com/premium-photo/ham-pizza_163782-2490.jpg?w=900",
   },
   {
-    id: 1,
+    id: 2,
     title: "Coke",
     description: "Coke with Fries",
     category: "drinks",
@@ -63,7 +63,7 @@ export const AllMenu = [
       "https://img.freepik.com/free-photo/top-view-pepperoni-pizza-sliced-into-six-slices_141793-2157.jpg?w=996&t=st=1689641301~exp=1689641901~hmac=b63c30c7e56eaf2761e206be67adde489ab4f287a74f8616cf95dc8f37188454",
   },
   {
-    id: 10,
+    id: 8,
     title: "Noodles",
     description: "This is a noodles",
     category: "fast-food",
@@ -72,7 +72,7 @@ export const AllMenu = [
       "https://img.freepik.com/free-photo/fresh-pasta-with-hearty-bolognese-parmesan-cheese-generated-by-ai_188544-9469.jpg?w=1060&t=st=1689641614~exp=1689642214~hmac=6f1a892f87f1c3b93727270b1b8bc530dfa8c99ffd5300806a297508e1b917f7",
   },
   {
-    id: 8,
+    id: 9,
     title: "Sandwich",
     description: "This is a sandwich",
     category: "fast-food",
@@ -82,7 +82,7 @@ export const AllMenu = [
   },
 
   {
-    id: 9,
+    id: 10,
     title: "Biryani",
     description: "This is a biryani",
     category: "rice",
