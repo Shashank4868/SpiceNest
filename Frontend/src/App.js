@@ -10,6 +10,7 @@ import {
 import HomePage from "./Restaurant/Pages/Home";
 import MenuPage from "./Restaurant/Pages/Menu";
 import CartProvider from "./Shared/context/CartProvider";
+import SignupForm from "./Restaurant/components/signup/SignupForm";
 
 function App() {
   return (
@@ -19,8 +20,11 @@ function App() {
           <Route path="/" exact>
             <HomePage />
           </Route>
-          <Route to="/menu">
+          <Route path="/menu" exact>
             <MenuPage />
+          </Route>
+          <Route path="/signup" exact>
+            <SignupForm />
           </Route>
           <Redirect to="/" />
         </Switch>

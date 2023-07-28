@@ -1,13 +1,13 @@
 import React from "react";
 
-import Button from "../../Shared/UI/Button";
 import CartButton from "../../Restaurant/components/cart/CartButton";
+import SignupButton from "../../Restaurant/components/signup/SignupButton";
 
 const NavButtons = () => {
   return (
     <div className="flex">
       <CartButton />
-      <Button title="Sign Up" />
+      <SignupButton />
     </div>
   );
 };

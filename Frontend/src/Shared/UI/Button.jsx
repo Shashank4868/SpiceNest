@@ -7,6 +7,7 @@ const Button = (props) => {
     <button
       onClick={props.onClick}
       disabled={props.disabled}
+      type={props.type}
       className={` ${classes} ${disabled} px-[14px] py-[12px] rounded-md flex items-center bg-button shadow-button  text-white text-base m-3 cursor-pointer border-none hover:shadow-buttonHover transition-shadow duration-200 hover:bg-buttonHover hover:transition-colors hover:duration-200`}
     >
       {props.title} {props.children}
