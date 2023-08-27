@@ -1,23 +1,84 @@
-// InputField.js
-import React from "react";
+import React, { useReducer, useEffect } from "react";
 
-const Input = ({ label, type, name, value, onChange, error }) => {
-  return (
-    <div className="mb-4">
-      <label htmlFor={name} className="block text-gray-700 font-medium mb-2">
-        {label}
-      </label>
+import { validate } from "../util/validators";
+import "./Input.css";
+
+const inputReducer = (state, action) => {
+  switch (action.type) {
+    case "CHANGE":
+      return {
+        ...state,
+        value: action.val,
+        isValid: validate(action.val, action.validators),
+      };
+    case "TOUCH": {
+      return {
+        ...state,
+        isTouched: true,
+      };
+    }
+    default:
+      return state;
+  }
+};
+
+const Input = (props) => {
+  const [inputState, dispatch] = useReducer(inputReducer, {
+    value: props.initialValue || "",
+    isTouched: false,
+    isValid: props.initialValid || false,
+  });
+
+  const { id, onInput } = props;
+  const { value, isValid } = inputState;
+
+  useEffect(() => {
+    onInput(id, value, isValid);
+  }, [id, value, isValid, onInput]);
+
+  const changeHandler = (event) => {
+    dispatch({
+      type: "CHANGE",
+      val: event.target.value,
+      validators: props.validators,
+    });
+  };
+
+  const touchHandler = () => {
+    dispatch({
+      type: "TOUCH",
+    });
+  };
+
+  const element =
+    props.element === "input" ? (
       <input
-        type={type}
-        id={name}
-        name={name}
-        value={value}
-        onChange={onChange}
-        className={`w-full border ${
-          error ? "border-red-500" : "border-gray-300"
-        } px-4 py-2 rounded-md`}
+        id={props.id}
+        type={props.type}
+        placeholder={props.placeholder}
+        onChange={changeHandler}
+        onBlur={touchHandler}
+        value={inputState.value}
       />
-      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+    ) : (
+      <textarea
+        id={props.id}
+        rows={props.rows || 3}
+        onChange={changeHandler}
+        onBlur={touchHandler}
+        value={inputState.value}
+      />
+    );
+
+  return (
+    <div
+      className={`form-control ${
+        !inputState.isValid && inputState.isTouched && "form-control--invalid"
+      }`}
+    >
+      <label htmlFor={props.id}>{props.label}</label>
+      {element}
+      {!inputState.isValid && inputState.isTouched && <p>{props.errorText}</p>}
     </div>
   );
 };

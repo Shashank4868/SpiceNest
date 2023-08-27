@@ -1,0 +1,8 @@
+{
+  "env": {
+    "DB_USER": "Shashank",
+    "DB_PASSWORD": "jaiswal123",
+    "DB_NAME": "fullStack",
+    "JWT_KEY": "supersecret_dont_share"
+  }
+}

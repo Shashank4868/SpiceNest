@@ -1,123 +1,155 @@
-// SignupForm.js
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+
 import Input from "../../../Shared/FormElements/Input";
-import SubmitButton from "../../../Shared/FormElements/SubmitButton";
-import MainNavigation from "../../../Shared/Navigation/MainNavigation";
+import ErrorModal from "../../../Shared/UIElements/ErrorModal";
+import LoadingSpinner from "../../../Shared/UIElements/LoadingSpinner";
+import Button from "../../../Shared/UI/Button";
+import { useForm } from "../../../Shared/hooks/form-hook";
+import {
+  VALIDATOR_EMAIL,
+  VALIDATOR_REQUIRE,
+  VALIDATOR_MINLENGTH,
+} from "../../../Shared/util/validators";
 
-const SignupForm = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+import { useHttpClient } from "../../../Shared/hooks/http-hook";
+import { AuthContext } from "../../../Shared/context/auth-context";
 
-  const [errors, setErrors] = useState({});
+const SignUpForm = () => {
+  const [isLoginMode, setIsLoginMode] = useState(true);
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const auth = useContext(AuthContext);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const [formState, inputHandler, setFormData] = useForm(
+    {
+      name: {
+        value: "",
+        isValid: false,
+      },
+      email: {
+        value: "",
+        isValid: false,
+      },
+    },
+    false
+  );
 
-    // Perform real-time validation on the specific field that was changed
-    const validationErrors = validateField(name, value);
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: validationErrors[name],
-    }));
+  const switchModeHandler = () => {
+    if (!isLoginMode) {
+      setFormData(
+        {
+          ...formState.inputs,
+          name: undefined,
+          email: undefined,
+        },
+        formState.inputs.email.isValid && formState.inputs.password.isValid
+      );
+    } else {
+      setFormData(
+        {
+          ...formState.inputs,
+          name: {
+            value: "",
+            isValid: false,
+          },
+          email: {
+            value: null,
+            isValid: false,
+          },
+        },
+        false
+      );
+    }
+    setIsLoginMode((prevMode) => !prevMode);
   };
 
-  const validateField = (name, value) => {
-    const errors = {};
+  const authSubmitHandler = (event) => {
+    event.preventDefault();
+    if (isLoginMode) {
+      try {
+        // const responseData = await sendRequest(
+        //   process.env.REACT_APP_BACKEND_URL + "/users/login",
+        //   "POST",
+        //   JSON.stringify({
+        //     email: formState.inputs.email.value,
+        //     password: formState.inputs.password.value,
+        //   }),
+        //   {
+        //     "Content-Type": "application/json",
+        //   }
+        // );
+        // auth.login(responseData.userId, responseData.token);
+        auth.login(1, "78rhgbfy89347yh");
+      } catch (err) {}
+    } else {
+      try {
+        const formData = new FormData();
+        formData.append("email", formState.inputs.email.value);
+        formData.append("name", formState.inputs.name.value);
+        formData.append("password", formState.inputs.password.value);
+        // const responseData = await sendRequest(
+        //   process.env.REACT_APP_BACKEND_URL + "/users/signup",
+        //   "POST",
+        //   formData
+        // );
 
-    // Validate username
-    if (name === "username") {
-      if (value.trim() === "") {
-        errors.username = "Username is required.";
-      }
+        // auth.login(responseData.userId, responseData.token);
+      } catch (err) {}
     }
-
-    // Validate email
-    if (name === "email") {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (value.trim() === "") {
-        errors.email = "Email is required.";
-      } else if (!emailRegex.test(value)) {
-        errors.email = "Invalid email address.";
-      }
-    }
-
-    // Validate password
-    if (name === "password") {
-      if (value.trim() === "") {
-        errors.password = "Password is required.";
-      } else if (value.length < 6) {
-        errors.password = "Password must be at least 6 characters long.";
-      }
-    }
-
-    // Validate confirmPassword
-    if (name === "confirmPassword") {
-      if (value.trim() === "") {
-        errors.confirmPassword = "Confirm Password is required.";
-      } else if (value !== formData.password) {
-        errors.confirmPassword = "Passwords do not match.";
-      }
-    }
-
-    return errors;
   };
 
   return (
     <React.Fragment>
-      <MainNavigation />
-      <div className="min-h-screen bg-gray-100 flex justify-center items-center">
-        <div className="bg-white p-8 shadow-md rounded-md w-full max-w-sm">
-          <h2 className="text-2xl font-semibold mb-6">Sign Up</h2>
-          <form>
-            <Input
-              label="Username"
-              type="text"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              error={errors.username}
-            />
-            <Input
-              label="Email"
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              error={errors.email}
-            />
-            <Input
-              label="Password"
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              error={errors.password}
-            />
-            <Input
-              label="Confirm Password"
-              type="password"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              error={errors.confirmPassword}
-            />
-          </form>
-          <SubmitButton
-            text="Sign Up"
-            onClick={() => console.log("Form submitted:", formData)}
+      {/* <ErrorModal error={error} onClear={clearError} /> */}
+      <div className="m-auto mt-8 mb-8 text-_112D4E text-center font-bold text-xl">
+        Let's Get Started!!!
+      </div>
+      <div className="m-auto mt-8 mb-8 text-_112D4E text-center font-bold text-xl">
+        {isLoginMode ? "Login" : "Sign Up"}
+      </div>
+      <div className="w-[30%] m-auto">
+        <form onSubmit={authSubmitHandler}>
+          {isLoading && <LoadingSpinner asOverlay />}
+
+          <Input
+            id="email"
+            label="E-mail"
+            type="email"
+            element="input"
+            onInput={inputHandler}
+            errorText="Invalid Email"
+            validators={[VALIDATOR_EMAIL()]}
           />
-        </div>
+          {!isLoginMode && (
+            <Input
+              id="name"
+              label="Name"
+              type="text"
+              element="input"
+              onInput={inputHandler}
+              errorText="Invalid Name"
+              validators={[VALIDATOR_REQUIRE()]}
+            />
+          )}
+          <Input
+            id="password"
+            label="Password"
+            type="password"
+            element="input"
+            onInput={inputHandler}
+            errorText="Invalid Password ( minimum 8 characters )"
+            validators={[VALIDATOR_MINLENGTH(8)]}
+          />
+          <div className="flex">
+            <Button type="submit" title="Submit" />
+            <Button inverse type="button" onClick={switchModeHandler}>
+              {" "}
+              Switch to {isLoginMode ? "SignUP" : "Login"}
+            </Button>
+          </div>
+        </form>
       </div>
     </React.Fragment>
   );
 };
 
-export default SignupForm;
+export default SignUpForm;

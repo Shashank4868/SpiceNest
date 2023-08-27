@@ -6,6 +6,7 @@ module.exports = {
       card: "0 2px 10px rgba(0, 0, 0, 0.2)",
       button: "0px 4px 6px rgba(0, 0, 0, 0.3)",
       buttonHover: " 0px 6px 8px rgba(0, 0, 0, 0.4)",
+      md: "0px 1px 2px rgba(0, 0, 0, 0.4)",
     },
     backgroundColor: {
       button: "#3F72AF",
@@ -22,6 +23,7 @@ module.exports = {
       _112D4E: "#112D4E",
       black: "#000",
       red: "#ff0000",
+      grey: "#808080",
     },
     fontFamily: {
       sans: ["Ubuntu", "sans-serif"],

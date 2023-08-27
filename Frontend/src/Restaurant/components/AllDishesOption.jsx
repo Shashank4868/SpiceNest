@@ -38,7 +38,6 @@ const AllDishesOption = () => {
           />
         ))}
       </div>
-      {/* send selected category as category and filter them */}
       <AllMenu category={category} />
     </React.Fragment>
   );

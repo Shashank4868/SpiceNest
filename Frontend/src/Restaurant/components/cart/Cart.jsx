@@ -1,11 +1,15 @@
 import React, { useContext } from "react";
 
 import CartContext from "../../../Shared/context/cart-context";
+import { AuthContext } from "../../../Shared/context/auth-context";
+
 import Button from "../../../Shared/UI/Button";
 import CartItem from "./CartItem";
 
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
+  const auth = useContext(AuthContext);
+
   const totalAmount = `${cartCtx.totalAmount.toFixed(2)}`;
   const cartLength = cartCtx.items.length;
 
@@ -15,6 +19,16 @@ const Cart = (props) => {
 
   const cartItemAddHandler = (item) => {
     cartCtx.addItem({ ...item, amount: 1 });
+  };
+
+  const orderCartItemsHandler = () => {
+    if (auth.isLoggedIn) {
+      cartCtx.clearCart();
+    } else {
+      alert("Please login to order");
+      props.onClose();
+      // setWarning("");
+    }
   };
 
   return (
@@ -45,13 +59,7 @@ const Cart = (props) => {
             <Button disabled>CLEAR</Button>
           )}
           {cartLength ? (
-            <Button
-              onClick={() => {
-                console.log("Ordered...");
-              }}
-            >
-              ORDER
-            </Button>
+            <Button onClick={orderCartItemsHandler}>ORDER</Button>
           ) : (
             <Button disabled>ORDER</Button>
           )}

@@ -11,25 +11,65 @@ import HomePage from "./Restaurant/Pages/Home";
 import MenuPage from "./Restaurant/Pages/Menu";
 import CartProvider from "./Shared/context/CartProvider";
 import SignupForm from "./Restaurant/components/signup/SignupForm";
+import { useAuth } from "./Shared/hooks/auth-hook";
+import { AuthContext } from "./Shared/context/auth-context";
+import MainNavigation from "./Shared/Navigation/MainNavigation";
+import Order from "./User/pages/Order";
 
 function App() {
+  const { token, login, logout, userId } = useAuth();
+
+  let routes;
+
+  if (token) {
+    routes = (
+      <Switch>
+        <Route path="/" exact>
+          <HomePage />
+        </Route>
+        <Route path="/menu" exact>
+          <MenuPage />
+        </Route>
+        <Route path="/orders" exact>
+          <Order />
+        </Route>
+        <Redirect to="/" />
+      </Switch>
+    );
+  } else {
+    routes = (
+      <Switch>
+        <Route path="/" exact>
+          <HomePage />
+        </Route>
+        <Route path="/menu" exact>
+          <MenuPage />
+        </Route>
+        <Route path="/signup" exact>
+          <SignupForm />
+        </Route>
+        <Redirect to="/" />
+      </Switch>
+    );
+  }
+
   return (
-    <CartProvider>
-      <Router>
-        <Switch>
-          <Route path="/" exact>
-            <HomePage />
-          </Route>
-          <Route path="/menu" exact>
-            <MenuPage />
-          </Route>
-          <Route path="/signup" exact>
-            <SignupForm />
-          </Route>
-          <Redirect to="/" />
-        </Switch>
-      </Router>
-    </CartProvider>
+    <AuthContext.Provider
+      value={{
+        isLoggedIn: !!token,
+        token: token,
+        userId: userId,
+        login: login,
+        logout: logout,
+      }}
+    >
+      <CartProvider>
+        <Router>
+          <MainNavigation />
+          {routes}
+        </Router>
+      </CartProvider>
+    </AuthContext.Provider>
   );
 }
 
