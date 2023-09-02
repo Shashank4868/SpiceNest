@@ -2,10 +2,10 @@ import React from "react";
 
 import Card from "../../Shared/UI/Card";
 import Button from "../../Shared/UI/Button";
-import { AllMenu as AllMenuItems } from "../../Shared/dishes/AllMenu";
+// import { AllMenu as AllMenuItems } from "../../Shared/dishes/AllMenu";
 
-const Middle = () => {
-  const FAST_FOOD = AllMenuItems.filter(
+const Middle = (props) => {
+  const FAST_FOOD = props.AllMenuItems.filter(
     (item) => item.category === "fast-food"
   );
   return (

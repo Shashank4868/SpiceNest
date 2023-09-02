@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { FcManager } from "react-icons/fc";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
@@ -36,7 +36,7 @@ const LogoutButton = () => {
               : ""
           }`}
         >
-          <Link to="/orders">Orders</Link>
+          <Link to={`/orders/${auth.userId}`}>Orders</Link>
           <hr className="border-white" />
           <button onClick={handleLogout}>Logout</button>
         </div>

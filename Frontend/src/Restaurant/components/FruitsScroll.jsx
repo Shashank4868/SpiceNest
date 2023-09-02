@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 
 import Card from "../../Shared/UI/Card";
-// import { Fruits } from "../../Shared/Dishes/Fruits";
-import { AllMenu as AllMenuItems } from "../../Shared/dishes/AllMenu";
 import { CgArrowLeftO, CgArrowRightO } from "react-icons/cg";
 import CartContext from "../../Shared/context/cart-context";
 
 const FruitsScroll = (props) => {
   const cartCtx = useContext(CartContext);
-  const Fruits = AllMenuItems.filter((item) => item.category === "fruits");
+  const Fruits = props.AllMenuItems.filter(
+    (item) => item.category === "fruits"
+  );
 
   const slideLeft = () => {
     var slider = document.getElementById("slider");

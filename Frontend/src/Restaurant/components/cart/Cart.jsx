@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 import CartContext from "../../../Shared/context/cart-context";
 import { AuthContext } from "../../../Shared/context/auth-context";
@@ -19,16 +20,6 @@ const Cart = (props) => {
 
   const cartItemAddHandler = (item) => {
     cartCtx.addItem({ ...item, amount: 1 });
-  };
-
-  const orderCartItemsHandler = () => {
-    if (auth.isLoggedIn) {
-      cartCtx.clearCart();
-    } else {
-      alert("Please login to order");
-      props.onClose();
-      // setWarning("");
-    }
   };
 
   return (
@@ -59,7 +50,10 @@ const Cart = (props) => {
             <Button disabled>CLEAR</Button>
           )}
           {cartLength ? (
-            <Button onClick={orderCartItemsHandler}>ORDER</Button>
+            // <Button onClick={orderCartItemsHandler}>ORDER</Button>
+            <Link to={`/checkout/${auth.userId}`}>
+              <Button onClick={props.onClose}>Order</Button>
+            </Link>
           ) : (
             <Button disabled>ORDER</Button>
           )}

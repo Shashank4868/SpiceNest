@@ -15,6 +15,7 @@ import { useAuth } from "./Shared/hooks/auth-hook";
 import { AuthContext } from "./Shared/context/auth-context";
 import MainNavigation from "./Shared/Navigation/MainNavigation";
 import Order from "./User/pages/Order";
+import Checkout from "./Restaurant/Pages/Checkout";
 
 function App() {
   const { token, login, logout, userId } = useAuth();
@@ -30,8 +31,11 @@ function App() {
         <Route path="/menu" exact>
           <MenuPage />
         </Route>
-        <Route path="/orders" exact>
+        <Route path="/orders/:uid" exact>
           <Order />
+        </Route>
+        <Route path="/checkout/:uid" exact>
+          <Checkout />
         </Route>
         <Redirect to="/" />
       </Switch>

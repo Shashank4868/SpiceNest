@@ -4,7 +4,7 @@ import MenuOptionCard from "../../Shared/UI/MenuOptionCard";
 import { DishCategories } from "../../Shared/dishes/DishCategories";
 import AllMenu from "./Menu/AllMenu";
 
-const AllDishesOption = () => {
+const AllDishesOption = (props) => {
   const [category, setCategory] = useState("All");
   const [isSelected, setIsSelected] = useState(DishCategories);
 
