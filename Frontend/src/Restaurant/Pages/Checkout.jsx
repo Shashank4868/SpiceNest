@@ -10,9 +10,7 @@ import LoadingSpinner from "../../Shared/UIElements/LoadingSpinner";
 import ErrorModal from "../../Shared/UIElements/ErrorModal";
 
 import {
-  VALIDATOR_EMAIL,
   VALIDATOR_MAXLENGTH,
-  VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRE,
 } from "../../Shared/util/validators";
 import Button from "../../Shared/UI/Button";

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 
 import { useHttpClient } from "../../Shared/hooks/http-hook";
-import { Redirect, useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 import OrderDetail from "../components/OrderDetail";
 import ErrorModal from "../../Shared/UIElements/ErrorModal";
