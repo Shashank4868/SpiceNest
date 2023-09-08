@@ -26,7 +26,7 @@ const AllMenu = (props) => {
   if (displayMenu.length !== 0) {
     return (
       <div className="m-8 bg-DBE2EF rounded-xl">
-        <div className="m-8 bg-DBE2EF flex flex-wrap justify-center rounded-xl">
+        <div className="m-8  flex flex-wrap justify-center rounded-xl">
           {displayMenu.map((item) => (
             <Menucard
               key={item.id}

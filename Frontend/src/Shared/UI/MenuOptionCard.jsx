@@ -9,7 +9,7 @@ const MenuOptionCard = (props) => {
       }}
       className={` ${classes} ${
         props.selected ? "bg-button text-button" : "bg-white text-white"
-      } w-[8vw] h-[18vh] rounded-md flex flex-col items-center justify-evenly  shadow-button   text-base m-3 cursor-pointer border-none hover:shadow-buttonHover transition-shadow duration-200 hover:bg-buttonHover hover:transition-colors hover:duration-200`}
+      } w-[8vw] h-[20vh] rounded-md flex flex-col items-center justify-evenly  shadow-button   text-base m-3 cursor-pointer border-none hover:shadow-buttonHover transition-shadow duration-200 hover:bg-buttonHover hover:transition-colors hover:duration-200`}
     >
       <div
         className={` ${

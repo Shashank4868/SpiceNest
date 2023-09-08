@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 
 import { useHttpClient } from "../../Shared/hooks/http-hook";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { Redirect, useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 import OrderDetail from "../components/OrderDetail";
 import ErrorModal from "../../Shared/UIElements/ErrorModal";
@@ -37,7 +37,9 @@ const Order = () => {
   return (
     <React.Fragment>
       {isLoading && <LoadingSpinner asOverlay />}
-      {error && <ErrorModal error={error} onClear={clearError} />}
+      {error && (
+        <div className="text-center text-red mt-8">No Orders Found.</div>
+      )}
       {!isLoading && loadedOrders && <OrderDetail orders={loadedOrders} />}
     </React.Fragment>
   );

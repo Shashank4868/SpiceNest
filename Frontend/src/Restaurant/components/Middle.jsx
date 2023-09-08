@@ -1,15 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Card from "../../Shared/UI/Card";
 import Button from "../../Shared/UI/Button";
+import Modal from "../../Shared/modal/Modal";
+import Cart from "./cart/Cart";
 // import { AllMenu as AllMenuItems } from "../../Shared/dishes/AllMenu";
 
 const Middle = (props) => {
+  const [showCart, setShowCart] = useState(false);
+
+  const showCartHandler = () => {
+    setShowCart((prevShowCart) => !prevShowCart);
+  };
+
+  const closeCartHandler = () => {
+    setShowCart((prevShowCart) => !prevShowCart);
+  };
+
   const FAST_FOOD = props.AllMenuItems.filter(
     (item) => item.category === "fast-food"
   );
+
   return (
     <main className="flex flex-row flex-wrap">
+      {showCart && (
+        <Modal>
+          <Cart onClose={closeCartHandler} />
+        </Modal>
+      )}
       <div className="w-[47%] m-auto mt-[5%] inline-table">
         <span className=" text-7xl leading-[6rem] font-sans font-bold">
           The Finest Cuisine Available in <b className="text-_3F72AF">Ranchi</b>
@@ -24,7 +42,7 @@ const Middle = (props) => {
           unique dining experience where you can explore an extensive menu
           featuring a fusion of flavors, aromas, and textures.
         </p>
-        <Button title="Order Now.." />
+        <Button title="Order Now.." onClick={showCartHandler} />
       </div>
       <div className="w-[45%] flex flex-wrap m-auto justify-around">
         {FAST_FOOD.map((food) => (
